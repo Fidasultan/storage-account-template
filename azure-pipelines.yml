@@ -19,3 +19,14 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
 
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'ARM Template deployment: Resource Group scope'
+  inputs:
+    azureResourceManagerConnection: 'Microsoft Partner Network (eeb9dfdd-9c17-44c3-a4a0-7529399ce200)'
+    subscriptionId: 'eeb9dfdd-9c17-44c3-a4a0-7529399ce200'
+    resourceGroupName: 'storage-account-poc-demo-rg'
+    location: 'East US'
+    csmFile: '$(System.DefaultWorkingDirectory)/_azureblob-arm-demo-CI/drop/storage-account.json'
+    csmParametersFile: '$(System.DefaultWorkingDirectory)/_azureblob-arm-demo-CI/drop/parameters.json'
+    overrideParameters: '-storageAccounts_test3453storageaccount_name mynewstorage4395343'
